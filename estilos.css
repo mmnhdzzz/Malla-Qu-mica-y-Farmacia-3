@@ -1,75 +1,23 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
-  color: #333;
-  padding: 2rem;
+.contenedor-semestres {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
   overflow-x: auto;
 }
 
-h1 {
-  text-align: center;
-  color: #5e3c53;
-  margin-bottom: 2rem;
-}
-
-#malla {
-  display: flex;
-  gap: 2rem;
-  justify-content: flex-start;
-}
-
-.semestre {
+.semestre-vertical {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: #ede6f2; /* lila pastel */
+  background-color: #ede6f2;
   padding: 1rem;
   border-radius: 1rem;
   min-width: 220px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.semestre h2 {
+.semestre-vertical h2 {
   text-align: center;
+  margin-bottom: 0.5rem;
   color: #5e3c53;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
-
-.ramo {
-  background-color: #ffffff;
-  border: 2px solid #5e3c53;
-  border-radius: 20px;
-  padding: 1rem;
-  transition: background-color 0.3s, transform 0.2s;
-  cursor: pointer;
-  opacity: 0.5;
-  user-select: none;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.ramo:hover {
-  transform: scale(1.02);
-}
-
-.ramo.activado {
-  opacity: 1;
-}
-
-.ramo.completado {
-  background-color: #5e3c53;
-  color: white;
-  text-decoration: line-through;
-  opacity: 1;
-}
-
-.ramo h3 {
-  margin: 0;
-  font-size: 0.95rem;
-}
-
-.ramo p {
-  margin: 0.3rem 0 0;
-  font-size: 0.8rem;
-  color: #666;
 }
