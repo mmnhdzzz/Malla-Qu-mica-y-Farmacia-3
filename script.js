@@ -40,14 +40,37 @@ const ramos = [
   { codigo: "QFAR 1126", nombre: "Inmunología", prereqs: ["QFAR 1113"], semestre: 6 },
   { codigo: "QFAR 1127", nombre: "Bioestadística", prereqs: ["QFAR 1106"], semestre: 6 },
   { codigo: "CES 1150", nombre: "Módulo Integrado Salud II", prereqs: ["CES 1149"], semestre: 6 },
+
+  { codigo: "QFAR 1128", nombre: "Farmacología en Sistemas II", prereqs: ["QFAR 1123"], semestre: 7 },
+  { codigo: "QFAR 1129", nombre: "Tecnología Farmacéutica I", prereqs: [], semestre: 7 },
+  { codigo: "QFAR 1130", nombre: "Farmacoquímica II", prereqs: ["QFAR 1125"], semestre: 7 },
+  { codigo: "QFAR 1131", nombre: "Administración y gestión farmacéutica", prereqs: ["SEMESTRE6"], semestre: 7 },
+  { codigo: "QFAR 1132", nombre: "Práctica Preliminar", prereqs: ["SEMESTRE6"], semestre: 7 },
+  { codigo: "ELTE", nombre: "Electivo Teológico", prereqs: [], semestre: 7 },
+
+  { codigo: "QFAR 1133", nombre: "Toxicología", prereqs: ["QFAR 1128", "QFAR 1121"], semestre: 8 },
+  { codigo: "QFAR 1134", nombre: "Tecnología farmacéutica II", prereqs: ["QFAR 1129"], semestre: 8 },
+  { codigo: "QFAR 1135", nombre: "Atención Farmacéutica", prereqs: ["QFAR 1124", "QFAR 1128"], semestre: 8 },
+  { codigo: "QFAR 1136", nombre: "Farmacia Comunitaria y Asistencial", prereqs: ["QFAR 1128", "QFAR 1129"], semestre: 8 },
+  { codigo: "QFAR 1137", nombre: "Seminarios de Investigación", prereqs: ["QFAR 1132"], semestre: 8 },
+  { codigo: "CES 1151", nombre: "Gestión de calidad y acreditación", prereqs: ["CES 1150"], semestre: 8 },
+
+  { codigo: "QFAR 1138", nombre: "Legislación Farmacéutica", prereqs: ["SEMESTRE7"], semestre: 9 },
+  { codigo: "QFAR 1139", nombre: "Biofarmacia", prereqs: ["QFAR 1134"], semestre: 9 },
+  { codigo: "QFAR 1140", nombre: "Cosmética Farmacéutica", prereqs: ["QFAR 1134"], semestre: 9 },
+  { codigo: "QFAR 1141", nombre: "Farmacia Clínica", prereqs: ["QFAR 1130", "QFAR 1135"], semestre: 9 },
+  { codigo: "ETI433", nombre: "Ética Profesional", prereqs: [], semestre: 9 },
+  { codigo: "DIVERSIDAD3", nombre: "Electivo Diversidad III", prereqs: [], semestre: 9 },
+
+  { codigo: "QFAR 1142", nombre: "Práctica Profesional", prereqs: ["SEMESTRE9"], semestre: 10 },
+  { codigo: "QFAR 1143", nombre: "Actividad Titulación", prereqs: ["QFAR 1137"], semestre: 10 },
+  { codigo: "QFAR 1144", nombre: "Electivo de Especialidad", prereqs: [], semestre: 10 },
 ];
 
 const malla = document.getElementById("malla");
 
 function renderMalla() {
-  const totalSemestres = 6;
-
-  // Contenedor que agrupa los semestres en fila
+  const totalSemestres = 10;
   const contenedor = document.createElement("div");
   contenedor.className = "contenedor-semestres";
 
@@ -55,31 +78,23 @@ function renderMalla() {
     const columna = document.createElement("div");
     columna.className = "semestre-vertical";
 
-    // Título semestre
     const titulo = document.createElement("h2");
     titulo.textContent = `Semestre ${s}`;
     columna.appendChild(titulo);
 
-    // Filtrar ramos por semestre
     ramos.filter(r => r.semestre === s).forEach(ramo => {
       const div = document.createElement("div");
       div.className = "ramo";
       div.id = ramo.codigo;
       div.innerHTML = `<h3>${ramo.nombre}</h3><p>${ramo.codigo}</p>`;
-
-      // Si no tiene prerrequisitos, activado desde el inicio
-      if (ramo.prereqs.length === 0) div.classList.add("activado");
-
-      // Al hacer clic cambia estado completado (si activado)
+      if (ramo.prereqs.length === 0 || ramo.prereqs.includes(`SEMESTRE${s - 1}`)) div.classList.add("activado");
       div.onclick = () => toggleRamo(ramo);
-
       columna.appendChild(div);
     });
 
     contenedor.appendChild(columna);
   }
 
-  // Vacía y añade el contenedor a #malla
   malla.innerHTML = "";
   malla.appendChild(contenedor);
 }
@@ -94,9 +109,15 @@ function toggleRamo(ramo) {
 function actualizarRamos() {
   ramos.forEach(ramo => {
     if (ramo.prereqs.length > 0) {
-      const prereqsCompletados = ramo.prereqs.every(cod =>
-        document.getElementById(cod)?.classList.contains("completado")
-      );
+      const prereqsCompletados = ramo.prereqs.every(cod => {
+        if (cod.startsWith("SEMESTRE")) {
+          const semestreNum = parseInt(cod.replace("SEMESTRE", ""));
+          const ramosSemestre = ramos.filter(r => r.semestre === semestreNum);
+          return ramosSemestre.every(r => document.getElementById(r.codigo)?.classList.contains("completado"));
+        } else {
+          return document.getElementById(cod)?.classList.contains("completado");
+        }
+      });
       const div = document.getElementById(ramo.codigo);
       if (prereqsCompletados) {
         div.classList.add("activado");
