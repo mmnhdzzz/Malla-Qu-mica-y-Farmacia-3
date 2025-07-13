@@ -87,7 +87,15 @@ function renderMalla() {
       div.className = "ramo";
       div.id = ramo.codigo;
       div.innerHTML = `<h3>${ramo.nombre}</h3><p>${ramo.codigo}</p>`;
-      if (ramo.prereqs.length === 0 || ramo.prereqs.includes(`SEMESTRE${s - 1}`)) div.classList.add("activado");
+
+      // Activar ramo si no tiene prereqs o si prereqs son semestre anterior completo
+      if (
+        ramo.prereqs.length === 0 ||
+        ramo.prereqs.includes(`SEMESTRE${s - 1}`)
+      ) {
+        div.classList.add("activado");
+      }
+
       div.onclick = () => toggleRamo(ramo);
       columna.appendChild(div);
     });
