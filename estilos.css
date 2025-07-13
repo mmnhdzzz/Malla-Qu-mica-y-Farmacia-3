@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  color: #5e3c53; /* PANTONE 7654 aproximado */
+}
+
+#malla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.ramo {
+  background-color: #fff;
+  border: 2px solid #5e3c53;
+  border-radius: 10px;
+  padding: 1rem;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  opacity: 0.5;
+  user-select: none;
+}
+
+.ramo.activado {
+  opacity: 1;
+}
+
+.ramo.completado {
+  background-color: #5e3c53;
+  color: white;
+  text-decoration: line-through;
+  opacity: 1;
+}
+
+.ramo h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.ramo p {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  color: #666;
+}
