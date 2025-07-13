@@ -1,78 +1,70 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
-  color: #333;
-  padding: 2rem;
-  overflow-x: auto;
+  background-color: #f5f0f8; /* lila pastel */
   margin: 0;
+  padding: 20px;
 }
 
 h1 {
   text-align: center;
-  color: #5e3c53;
-  margin-bottom: 2rem;
+  color: #5d3a66; /* tono más oscuro del lila */
+  margin-bottom: 30px;
 }
 
 .contenedor-semestres {
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  justify-content: space-around;
+  flex-wrap: nowrap;
   overflow-x: auto;
-  padding-bottom: 1rem;
+  gap: 20px;
 }
 
 .semestre-vertical {
+  background-color: #e3d1ec;
+  border-radius: 16px;
+  padding: 10px;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  background-color: #ede6f2; /* lila pastel */
-  padding: 1rem;
-  border-radius: 1rem;
-  min-width: 220px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .semestre-vertical h2 {
   text-align: center;
-  margin-bottom: 0.5rem;
-  color: #5e3c53;
-  font-weight: bold;
+  color: #5d3a66;
+  font-size: 18px;
 }
 
 .ramo {
-  background-color: #ffffff;
-  border: 2px solid #5e3c53;
-  border-radius: 20px;
-  padding: 1rem;
-  cursor: pointer;
-  opacity: 0.5;
-  user-select: none;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: background-color 0.3s, transform 0.2s, opacity 0.3s;
-}
-
-.ramo:hover {
-  transform: scale(1.03);
-}
-
-.ramo.activado {
-  opacity: 1;
-}
-
-.ramo.completado {
-  background-color: #5e3c53;
-  color: white;
-  text-decoration: line-through;
-  opacity: 1;
+  background-color: #f9f2fc;
+  padding: 10px;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  transition: 0.3s;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .ramo h3 {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 14px;
 }
 
 .ramo p {
-  margin: 0.3rem 0 0;
-  font-size: 0.8rem;
-  color: #666;
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: #555;
+}
+
+.ramo.activado {
+  cursor: pointer;
+  border-color: #a36ebc;
+  opacity: 1;
+}
+
+.ramo.completado {
+  background-color: #c8a2c8;
+  color: white;
+  text-decoration: line-through;
 }
